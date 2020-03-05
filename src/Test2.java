@@ -7,6 +7,22 @@ import java.util.*;
 public class Test2 {
 
     public static void main(String[] args){
+        int[] array = {1, 5, 2, 6, 3, 7, 4};
+
+
+        int[][] commands = {
+                {2,5,3},
+                {4,4,1},
+                {1,7,3},
+        };
+
+
+
+
+
+        sol(array, commands);
+
+
 
 //        sol2558();
 //        sol10950();
@@ -27,9 +43,11 @@ public class Test2 {
 //        sol10818();
 //        sol2438();
 //        sol1463();
+//        sol11726();
+//        sol11727();
 
 
-        System.out.println(fibo(7));
+//        System.out.println(fibo(7));
 
 
 
@@ -37,12 +55,78 @@ public class Test2 {
         
     }
 
+    private static int[] sol(int[] array, int[][] commands) {
+        int[] answer = new int[commands.length];
+        for (int i = 0; i < commands.length; i++) {
+            int startIdx = commands[i][0];
+            int endIdx = commands[i][1];
+            int findIdx = commands[i][2];
+            answer[i] = sort(array, startIdx, endIdx, findIdx);
+        }
+        return answer;
+    }
+
+    private static int sort(int[] arr, int s, int e, int f){
+        int[] tmpArr = Arrays.copyOfRange(arr, s-1, e);
+        Arrays.sort(tmpArr);
+        return tmpArr[f - 1];
+    }
+
+
+    private static void sol11727() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] dp = new int[n + 1];
+
+        for(int i = 0; i <= n; i++){
+            if(i == 0){
+                dp[i] = 1;
+            }else if(i == 1){
+                dp[i] = 1;
+            }else{
+                dp[i] = (dp[i - 1] + (dp[i - 2] * 2)) % 10007;
+            }
+        }
+        System.out.println(dp[n]);
+
+    }
+
+    private static void sol1726() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n + 1];
+
+        arr[1] = 1;
+        if(n >= 2){
+            arr[2] = 2;
+        }
+
+        for (int i = 3; i <= n; i++) {
+            arr[i] = (arr[i-1] + arr[i-2]) % 10007;
+        }
+
+    }
+
+//    private int dp(int n) {
+//        if(n == 1){
+//            return 0;
+//
+//        }
+//
+//    }
+
+
     private static int fibo(int i) {
         if(i == 1 || i ==2){
             return 1;
         }else{
             return fibo(i-2) + fibo(i-1);
         }
+
+
+
+
+
 
     }
 
@@ -55,8 +139,14 @@ public class Test2 {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+        int cnt;
 
-
+//        if (n % 3 == 0)
+//            n / 3
+//
+//            n % 2 == 0
+//
+//            n - 1
 
 
 
@@ -87,7 +177,6 @@ public class Test2 {
 
     private static void sol10818() {
         Scanner sc = new Scanner(System.in);
-
         int max = -1000000, min = 1000000;
         int numCnt = sc.nextInt();
         int[] arr = new int[numCnt];
